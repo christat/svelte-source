@@ -1,4 +1,5 @@
 <script>
+	import SourceConsole from './components/SourceConsole.svelte';
 	import SourceNotification from './components/SourceNotification.svelte';
 </script>
 
@@ -43,3 +44,4 @@
 </style>
 
 <SourceNotification />
+<SourceConsole />

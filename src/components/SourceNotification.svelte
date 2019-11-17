@@ -24,7 +24,7 @@
     // Fades out when second NumberContainer ends transitioning with a delay (below).
     let visible = false;
     function fadeOut() {
-        setTimeout(() => visible = false, 2000);
+        setTimeout(() => visible = false, 1000);
     }
 
     onMount(() => visible = true);
