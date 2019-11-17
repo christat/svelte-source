@@ -41,7 +41,7 @@
             <span>{endValue}</span> 
         {:else}
             <span 
-                in:counter="{{ startValue, endValue, sign }}"
+                in:counter="{{ startValue, endValue }}"
                 on:introend="{onCounterEnd}"
             />
         {/if}

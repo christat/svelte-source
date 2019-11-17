@@ -1,14 +1,23 @@
 import { writable, derived } from 'svelte/store';
 
-export const diff = writable(0);
-export const source = writable(0);
+const createSource = () => {
+    const { subscribe, set, update } = writable(0);
 
+    return {
+        subscribe,
+        set: value => set(Math.max(0, value)),
+        reset: () => set(0),
+        update
+    }
+}
+
+export const source = createSource();
+export const diff = writable(0);
 export const total = derived(
-    diff,
-    source,
-	($diff, $source) => $diff + $source
+    [diff, source],
+	([$diff, $source]) => $diff + $source
 );
 
-export const playerDeathPenalty = () => {
-    source.update(amount => Math.round(0.9 * amount));
+export function playerDeathPenalty() {
+    diff.set(Math.round(0.1 * source));
 }

@@ -1,7 +1,7 @@
 <script>
     import { diff, source, playerDeathPenalty } from '../stores/source';
 
-    let value = 400;
+    let value = '';
     $: disabled = typeof value !== 'number';
 
     const resetValueWrapper = fn => {
@@ -52,6 +52,6 @@
     <button {disabled} on:click="{resetValueWrapper(() => diff.set(value))}">Set diff</button>
     <button {disabled} on:click="{resetValueWrapper(() => source.set(value))}">Set source</button>
     <p>- OR -</p>
-    <button on:click="{() => source.set(0)}">reset source</button>
+    <button on:click="{source.reset}">reset source</button>
     <button on:click="{playerDeathPenalty}">player dies</button>
 </div>
