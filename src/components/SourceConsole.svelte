@@ -1,15 +1,19 @@
 <script>
-    import { diff, source, playerDeathPenalty } from '../stores/source';
+    import { diff, source } from '../stores/source';
 
     let value = '';
     $: disabled = typeof value !== 'number';
+
+    const handlePlayerDeath = () => {
+        $diff = -Math.round(0.1 * $source);
+    };
 
     const resetValueWrapper = fn => {
         return () => {
             fn();
             value = '';
         }
-    }
+    };
 </script>
 
 <style>
@@ -49,9 +53,9 @@
 <div>
     <p>SET SOURCE</p>
     <input type=number bind:value={value} placeholder="input a number">
-    <button {disabled} on:click="{resetValueWrapper(() => diff.set(value))}">Set diff</button>
-    <button {disabled} on:click="{resetValueWrapper(() => source.set(value))}">Set source</button>
+    <button {disabled} on:click="{resetValueWrapper(() => diff.set(Math.max(-$source, value)))}">Set diff</button>
+    <button {disabled} on:click="{resetValueWrapper(() => source.set(Math.max(0, value)))}">Set source</button>
     <p>- OR -</p>
     <button on:click="{source.reset}">reset source</button>
-    <button on:click="{playerDeathPenalty}">player dies</button>
+    <button on:click="{handlePlayerDeath}">player dies</button>
 </div>

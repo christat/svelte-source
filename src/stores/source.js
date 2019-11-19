@@ -17,7 +17,3 @@ export const total = derived(
     [diff, source],
 	([$diff, $source]) => $diff + $source
 );
-
-export function playerDeathPenalty() {
-    diff.set(Math.round(0.1 * source));
-}

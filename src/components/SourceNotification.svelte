@@ -46,7 +46,12 @@
                 <NumberCounter diffMode={true} endValue={$diff} onCounterEnd={hideDiff} />
             </SlideTopDownContainer>
             <LeftImageContainer>
-                <NumberCounter startValue={$source} endValue={diffVisible ? $source : $total} onCounterEnd={hideSource} />
+                <NumberCounter
+                    hideSign={true}
+                    startValue={$source}
+                    endValue={diffVisible ? $source : $total}
+                    onCounterEnd={hideSource}
+                />
             </LeftImageContainer>
         </div>
     </FadeContainer>

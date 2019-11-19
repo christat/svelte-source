@@ -7,6 +7,7 @@
     export let diffMode = false;
     export let startValue = 0;
     export let endValue = 100;
+    export let hideSign = false;
     $: sign = !diffMode || endValue === startValue ? '' : endValue < startValue ? '-' : '+';
 
     let visible = false;
@@ -41,7 +42,7 @@
             <span>{endValue}</span> 
         {:else}
             <span 
-                in:counter="{{ startValue, endValue }}"
+                in:counter="{{ startValue, endValue, hideSign }}"
                 on:introend="{onCounterEnd}"
             />
         {/if}
