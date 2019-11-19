@@ -5,6 +5,9 @@
     import SlideTopDownContainer from './SlideTopDownContainer.svelte';
     import NumberCounter from './NumberCounter.svelte';
 
+    // used as "ruler" to preserve left-margin on source number wrt diff; checkout styles/markup for deets.
+    $: longestNumber = String($diff).length >= String($source).length ? $diff : $source;
+
     // diff refers to the first NumberContainer (with sign and color).
     // The handler triggers sliding out by SlideTopDownContainer on transition end.
     $: diffVisible = $diff !== 0;
@@ -20,32 +23,34 @@
 </script>
 
 <style>
-    .container {
+    .layout {
         position: absolute;
         bottom: 20vh;
         left: 5vw;
     }
 
-    .flex {
+    .notification {
         display: inline-flex;
         flex-flow: column nowrap;
         align-items: flex-end;
         justify-content: flex-end;
     }
 
-    span {
+    .ruler {
         visibility: hidden;
+        height: 0;
     }
 </style>
 
-<div class="container">
+<div class="layout">
     <FadeContainer {visible}>
-        <div class="flex">
-            <span>{$total}</span>
+        <div class="notification">
+            <span class="ruler">{$total}</span>
             <SlideTopDownContainer visible={diffVisible}>
                 <NumberCounter diffMode={true} endValue={$diff} onCounterEnd={hideDiff} />
             </SlideTopDownContainer>
             <LeftImageContainer>
+                <span class="ruler">{longestNumber}</span>
                 <NumberCounter
                     hideSign={true}
                     startValue={$source}
