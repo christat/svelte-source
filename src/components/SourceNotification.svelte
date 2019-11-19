@@ -4,6 +4,7 @@
     import LeftImageContainer from './LeftImageContainer.svelte';
     import SlideTopDownContainer from './SlideTopDownContainer.svelte';
     import NumberCounter from './NumberCounter.svelte';
+    import NumberCounterSpring from './NumberCounterSpring.svelte';
 
     // used as "ruler" to preserve left-margin on source number wrt diff; checkout styles/markup for deets.
     $: longestNumber = String($diff).length >= String($source).length ? $diff : $source;
@@ -47,7 +48,7 @@
         <div class="notification">
             <span class="ruler">{$total}</span>
             <SlideTopDownContainer visible={diffVisible}>
-                <NumberCounter diffMode={true} endValue={$diff} onCounterEnd={hideDiff} />
+                <NumberCounterSpring diffMode={true} endValue={$diff} onCounterEnd={hideDiff} />
             </SlideTopDownContainer>
             <LeftImageContainer>
                 <span class="ruler">{longestNumber}</span>
